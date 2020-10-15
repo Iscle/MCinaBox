@@ -10,7 +10,6 @@ endif ()
 
 add_library(boat SHARED boat.c loadme.c boat_activity.c)
 find_library(log-lib log)
-find_library(dl-lib dl)
 find_library(android-lib android)
-target_link_libraries(boat ${log-lib} ${dl-lib} ${android-lib})
+target_link_libraries(boat ${log-lib} ${android-lib})
 SET(CMAKE_CXX_FLAGS "-mthumb -std=gnu99")

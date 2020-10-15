@@ -4,12 +4,11 @@
 #include <android/native_window.h>
 #include <android/native_activity.h>
 #include <jni.h>
-#include <android/log.h>
 
 #define KeyPress              2
 #define KeyRelease            3
 #define ButtonPress           4
-#define ButtonRelease          5
+#define ButtonRelease         5
 #define MotionNotify          6
 
 #define Button1               1
@@ -38,21 +37,18 @@ typedef struct {
 } BoatInputEvent;
 
 typedef struct {
-
     ANativeWindow *window;
     void *display;
 
     JavaVM *android_jvm;
     jclass class_BoatInput;
 
-    int (*current_event_processor)();
+    void (*current_event_processor)();
 
     BoatInputEvent current_event;
-
 } Boat;
 
 Boat mBoat;
-
 
 ANativeWindow *boatGetNativeWindow();
 
