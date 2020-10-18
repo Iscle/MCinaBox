@@ -11,7 +11,9 @@ jobs:
       - name: Install NDK v16.1.4479499
         run: ${ANDROID_SDK_ROOT}/tools/bin/sdkmanager --install "ndk;16.1.4479499"
       - name: Build MCinaBox APK with Gradle
-        run: ./gradlew clean :mcinabox:assembleDebug
+        run: |
+          chmod +x gradlew
+          ./gradlew clean :mcinabox:assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v2
