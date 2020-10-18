@@ -8,20 +8,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Install NDK
-        run: ${ANDROID_HOME}/tools/bin/sdkmanager --install "ndk;16.1.4479499" --sdk_root=${ANDROID_SDK_ROOT}
-      - name: Build aarch64 APK with Gradle
+      - name: Install NDK v16.1.4479499
+        run: ${ANDROID_SDK_ROOT}/tools/bin/sdkmanager --install "ndk;16.1.4479499"
+      - name: Build MCinaBox APK with Gradle
         run: |
-          mkdir -p out
-          chmod +x gradlew
-          ./gradlew clean assembleDebug
+#          mkdir -p out
+#          chmod +x gradlew
+          ./gradlew :mcinabox:clean :mcinabox:assembleDebug
           mv mcinabox/build/outputs/apk/debug/mcinabox-debug.apk out/MCinaBox-debug-aarch64.apk
-      - name: Build aarch32 APK with Gradle
-        run: |
-          replace="\, \"arm64-v8a\""
-          sed -i "s/$replace//g" boat/build.gradle
-          ./gradlew assembleDebug
-          mv mcinabox/build/outputs/apk/debug/mcinabox-debug.apk out/MCinaBox-debug-aarch32.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v2
